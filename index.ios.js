@@ -18,11 +18,12 @@ class TodoApp extends Component {
   constructor(props) {
     super(props);
     var myFirebaseRef = new Firebase('https://todoapp001.firebaseio.com/');
-
+    // everything would be under root->items node
     this.itemsRef = myFirebaseRef.child('items');
 
     this.state = {
       newTodo: '',
+      //rowHasChanged affects how much is re-rendered,
       todoSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
     };
 
@@ -53,6 +54,9 @@ class TodoApp extends Component {
     );
   }
 
+  // populate each element in rowData into a renderable view component
+  // rowData.text is an object, in the form of {todo: "to do text"}
+
   renderRow(rowData) {
     return (
       <TouchableHighlight
@@ -69,7 +73,12 @@ class TodoApp extends Component {
   }
 
   componentDidMount() {
-    // When a todo is added
+    /*  1. when user clicks Add button, addTodo() would be called, firebase changed, triggering
+        itemsRef.on('child_added', callback) function, the callback would change the todoSource which is a state,
+        when todoSource is changed, the LitView would automatically re-rendering those changed list items (react native minimun rendering feature)
+        2. when user click listitem which is a TouchableHighlight, addTodo() would be triggered, thusly deleting items in the firebase, and then
+        itemsRef.on('child_removed', callback) would be called, todoSource is changed and then list items re-rendered again.
+    */
     this.itemsRef.on('child_added', (dataSnapshot) => {
       this.items.push({
         id: dataSnapshot.key(),
@@ -80,7 +89,6 @@ class TodoApp extends Component {
       });
     });
 
-    // When a todo is removed
     this.itemsRef.on('child_removed', (dataSnapshot) => {
         this.items = this.items.filter((x) => x.id !== dataSnapshot.key());
         this.setState({
@@ -89,6 +97,7 @@ class TodoApp extends Component {
     });
   }
 
+  // insert {todo: "to do text"} object into Firebase
   addTodo() {
     if (this.state.newTodo !== '') {
       this.itemsRef.push({
