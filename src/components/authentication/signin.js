@@ -63,6 +63,7 @@ class Signin extends React.Component {
       success: (user) => {
         console.log('login success');
         console.log(user);
+        this.setState({errorMessage: ''});
       },
 
       error: (data, error) => {
