@@ -1,4 +1,4 @@
-Authentication React Native App
+##Authentication React Native App
 - Original instructions of the course:
 [Udemy - Building Apps with React Native](https://www.udemy.com/courses/search/?q=Build+Apps+with+React+Native&src=sac&kw=build+apps+react&lang=en)
 - Since Parse is out of service, configure Parse Server in [Heroku](https://dashboard.heroku.com/) as a workaround, [instructions](http://www.alekseev.ca/blog/using-a-parse-server-with-react-native)
