@@ -18,6 +18,7 @@ class Signin extends React.Component {
     this.state = {
       username: '',
       password: '',
+      errorMessage: '',
     };
 
     this.onPress = this.onPress.bind(this);
@@ -49,6 +50,7 @@ class Signin extends React.Component {
           }}
           />
 
+        <Text>{this.onErrorMessage(this.state.errorMessage)}</Text>
         <Button text={'Sign In'} onPress={this.onPress} />
       </View>
     );
@@ -66,9 +68,18 @@ class Signin extends React.Component {
       error: (data, error) => {
         console.log('login failed');
         console.log(data, error);
+        this.setState({errorMessage: error.message});
       }
     });
   }
+  /* helper method to display a friendlier error message
+  */
+  onErrorMessage(errorMessage) {
+    if (this.state.errorMessage) {
+      return 'Invalid Login, Please try again.';
+    }
+  }
+
 }
 
 var styles = StyleSheet.create({
