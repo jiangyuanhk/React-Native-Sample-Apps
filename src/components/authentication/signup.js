@@ -2,17 +2,57 @@ var React = require('react-native');
 var {
   Text,
   View,
-  StyleSheet
+  StyleSheet,
+  TextInput,
 } = React;
 
+const Button = require('../common/button');
+
 class Signup extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+      passwordConfirmation: '',
+    };
+    this.onSigninPress = this.onSigninPress.bind(this);
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>You can sign up here!</Text>
+        <Text>Sign Up</Text>
+
+        <Text style={styles.label}>Username:</Text>
+        <TextInput
+          value={this.state.username}
+          onChangeText={(text) => this.setState({username: text})}
+          style={styles.input} />
+
+        <Text style={styles.label}>Password:</Text>
+        <TextInput
+          secureTextEntry={true}
+          value={this.state.password}
+          onChangeText={(text) => this.setState({password: text})}
+          style={styles.input} />
+
+        <Text style={styles.label}>Confirm Password:</Text>
+        <TextInput
+          secureTextEntry={true}
+          value={this.state.passwordConfirmation}
+          onChangeText={(text) => this.setState({passwordConfirmation: text})}
+          style={styles.input} />
+
+        <Button text={'I have an account...'} onPress={this.onSigninPress} />
       </View>
     );
   }
+
+  onSigninPress() {
+    this.props.navigator.pop();
+  }
+
 }
 
 var styles = StyleSheet.create({
@@ -21,6 +61,19 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white'
+  },
+  label: {
+    fontSize: 18
+  },
+  input: {
+    padding: 4,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    margin: 5,
+    width: 200,
+    alignSelf: 'center'
   }
 });
 
