@@ -25,13 +25,13 @@ curl -X POST \
 - Use `main.js` as a shared endpoint for both `index.ios.js` and 'android.ios.js'
 - Organize files by UI components, whether they are shared or OS-specific, ect.
 - **Structure of src folder**
+```
         ├── components
         │   ├── authentication
         │   │   └── signin.js
         │   └── common
         │       └── button.js
         └── main.js
-
+```
 - **User sign in**
  - `secureTextEntry={true}` in `<Text>` tag to make typed-in passwords invisible
- 
