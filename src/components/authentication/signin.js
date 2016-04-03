@@ -8,6 +8,7 @@ var {
 } = React;
 
 var Button = require('../common/button');
+const Parse = require('parse/react-native');
 
 class Signin extends React.Component {
   constructor(props) {
@@ -18,6 +19,8 @@ class Signin extends React.Component {
       username: '',
       password: '',
     };
+
+    this.onPress = this.onPress.bind(this);
   }
 
   render() {
@@ -29,7 +32,10 @@ class Signin extends React.Component {
         <TextInput
           style={styles.input}
           value={this.state.username}
-          onChangeText={(text) => this.setState({username: text})}
+          onChangeText={(text) => {
+            console.log(`when password is changed, password is ${text}`)
+            this.setState({username: text})
+          }}
           />
 
         <Text style={styles.label}>Password:</Text>
@@ -37,7 +43,10 @@ class Signin extends React.Component {
           secureTextEntry={true}
           style={styles.input}
           value={this.state.password}
-          onChangeText={(text) => this.setState({password: text})}
+          onChangeText={(text) => {
+            console.log(`when password is changed, password is ${text}`)
+            this.setState({password: text})
+          }}
           />
 
         <Button text={'Sign In'} onPress={this.onPress} />
@@ -47,6 +56,18 @@ class Signin extends React.Component {
 
   onPress() {
     // log user in
+    console.log(`when pressed login button, username is ${this.state.username}, password is ${this.state.password}`);
+    Parse.User.logIn(this.state.username, this.state.password, {
+      success: (user) => {
+        console.log('login success');
+        console.log(user);
+      },
+
+      error: (data, error) => {
+        console.log('login failed');
+        console.log(data, error);
+      }
+    });
   }
 }
 

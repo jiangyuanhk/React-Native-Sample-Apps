@@ -8,9 +8,15 @@ var {
 
 // import signin component
 var Signin = require('./components/authentication/signin');
+const Parse = require('parse/react-native');
 
 class Main extends React.Component {
   // Your App Code
+  componentWillMount() {
+    Parse.initialize('myAppId','unused');
+    Parse.serverURL = 'https://parse-server-01.herokuapp.com/parse';
+  }
+
   render() {
     return (
       <View style={styles.container}>

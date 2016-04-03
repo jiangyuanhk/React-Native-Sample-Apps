@@ -18,3 +18,9 @@ Authentication React Native App
         -d '{"username":"TESTUSER","password":"PASSWORD"}' \
         http://parse-server-01.herokuapp.com/parse/classes/_User
       ```
+
+
+
+###Notes
+- Use `main.js` as a shared endpoint for both `index.ios.js` and 'android.ios.js'
+- Organize files by UI components, whether they are shared or OS-specific, ect.
