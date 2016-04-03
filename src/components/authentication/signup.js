@@ -64,8 +64,11 @@ class Signup extends React.Component{
     user.set('password', this.state.password);
 
     user.signUp(null, {
-      success: (user) => { console.log(user);; },
-      error: (user, error) => { console.log(error); }
+      success: (user) => {
+        console.log(user);
+        this.setState({errorMessage: ''});
+      },
+      error: (user, error) => { this.setState({errorMessage: error.message}); }
     });
 
   }
