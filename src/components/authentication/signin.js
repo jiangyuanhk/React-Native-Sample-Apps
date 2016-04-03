@@ -22,6 +22,7 @@ class Signin extends React.Component {
     };
 
     this.onPress = this.onPress.bind(this);
+    this.onSignupPress = this.onSignupPress.bind(this);
   }
 
   render() {
@@ -52,8 +53,13 @@ class Signin extends React.Component {
 
         <Text>{this.onErrorMessage(this.state.errorMessage)}</Text>
         <Button text={'Sign In'} onPress={this.onPress} />
+        <Button text={'Sign Up'} onPress={this.onSignupPress} />
       </View>
     );
+  }
+
+  onSignupPress() {
+    this.props.navigator.push({name: 'signup'});
   }
 
   onPress() {

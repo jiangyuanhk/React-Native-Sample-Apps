@@ -29,7 +29,7 @@ class Main extends React.Component {
 
   renderScene(route, navigator) {
     var Component = ROUTES[route.name]; // ROUTES['signin'] => Signin
-    return <Component />;
+    return <Component route={route} navigator={navigator} />;
   }
 
   render() {
