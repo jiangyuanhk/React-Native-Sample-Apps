@@ -6,6 +6,7 @@ var {
   TextInput,
 } = React;
 
+const Parse = require('parse/react-native');
 const Button = require('../common/button');
 
 class Signup extends React.Component{
@@ -57,6 +58,16 @@ class Signup extends React.Component{
         this.setState({errorMessage: 'Your password does not match'});
         return;
     }
+
+    var user = new Parse.User();
+    user.set('username', this.state.username);
+    user.set('password', this.state.password);
+
+    user.signUp(null, {
+      success: (user) => { console.log(user);; },
+      error: (user, error) => { console.log(error); }
+    });
+
   }
 
   onSigninPress() {
