@@ -3,25 +3,41 @@ var React = require('react-native');
 var {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Navigator,
 } = React;
+
 
 // import signin component
 var Signin = require('./components/authentication/signin');
 const Parse = require('parse/react-native');
 
+var ROUTES = {
+  signin: Signin
+};
+
+
 class Main extends React.Component {
   // Your App Code
-  componentWillMount() {
+  constructor(props){
+    super(props);
     Parse.initialize('myAppId','unused');
     Parse.serverURL = 'https://parse-server-01.herokuapp.com/parse';
   }
 
+  renderScene(route, navigator) {
+    var Component = ROUTES[route.name]; // ROUTES['signin'] => Signin
+    return <Component />;
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Signin />
-      </View>
+      <Navigator
+        style={styles.container}
+        initialRoute={{name: 'signin'}}
+        renderScene={this.renderScene}
+        configureScene={() => { return Navigator.SceneConfigs.FloatFromRight; }}
+        />
     );
   }
 }
@@ -30,8 +46,6 @@ class Main extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 });
 
