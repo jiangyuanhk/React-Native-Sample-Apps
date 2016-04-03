@@ -35,3 +35,7 @@ curl -X POST \
 ```
 - **User sign in**
  - `secureTextEntry={true}` in `<Text>` tag to make typed-in passwords invisible
+
+- **Navigation**
+ - think of navigator as a stack of views, pop / push views, we put related views in the same stack
+ - When it comes to going to another part of the App, replace the stack completely
