@@ -15,8 +15,10 @@ class Signup extends React.Component{
       username: '',
       password: '',
       passwordConfirmation: '',
+      errorMessage: '',
     };
     this.onSigninPress = this.onSigninPress.bind(this);
+    this.onSignupPress = this.onSignupPress.bind(this);
   }
 
   render() {
@@ -43,10 +45,18 @@ class Signup extends React.Component{
           value={this.state.passwordConfirmation}
           onChangeText={(text) => this.setState({passwordConfirmation: text})}
           style={styles.input} />
-
+        <Text style={styles.label}>{this.state.errorMessage}</Text>
+        <Button text={'Sign Up'} onPress={this.onSignupPress} />
         <Button text={'I have an account...'} onPress={this.onSigninPress} />
       </View>
     );
+  }
+
+  onSignupPress() {
+    if (this.state.password !== this.state.passwordConfirmation) {
+        this.setState({errorMessage: 'Your password does not match'});
+        return;
+    }
   }
 
   onSigninPress() {
