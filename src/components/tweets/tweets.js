@@ -6,20 +6,28 @@ const {
   View,
 } = React;
 
-
+const Parse = require('parse/react-native');
 
 class Tweets extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      user: null,
     };
+    // this is an asyncronous call
+    Parse.User.currentAsync()
+      .then((user) => {this.setState({user: user})});
   }
 
   render() {
+    if (!this.state.user) {
+      return <Text>Loading</Text>;
+    }
+
+    var username = this.state.user.get('username');
     return (<View style={styles.container}>
       <Text>
-        Welcome back !!
+        Welcome back, {username} !!
       </Text>
     </View>);
   }
