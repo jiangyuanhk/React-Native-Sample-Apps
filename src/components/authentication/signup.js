@@ -67,6 +67,7 @@ class Signup extends React.Component{
       success: (user) => {
         console.log(user);
         this.setState({errorMessage: ''});
+        this.props.navigator.immediatelyResetRouteStack([{name: 'tweets'}]);
       },
       error: (user, error) => { this.setState({errorMessage: error.message}); }
     });

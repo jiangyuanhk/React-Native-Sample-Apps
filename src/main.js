@@ -11,11 +11,13 @@ var {
 // import signin component
 var Signin = require('./components/authentication/signin');
 var Signup = require('./components/authentication/signup');
+var Tweets = require('./components/tweets/tweets');
 const Parse = require('parse/react-native');
 
 var ROUTES = {
   signin: Signin,
   signup: Signup,
+  tweets: Tweets,
 };
 
 

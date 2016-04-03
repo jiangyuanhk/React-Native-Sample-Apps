@@ -70,6 +70,7 @@ class Signin extends React.Component {
         console.log('login success');
         console.log(user);
         this.setState({errorMessage: ''});
+        this.props.navigator.immediatelyResetRouteStack([{name:'tweets'}]);
       },
 
       error: (data, error) => {
